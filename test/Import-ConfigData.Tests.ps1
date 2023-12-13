@@ -1,7 +1,7 @@
 BeforeAll {
 
     if ($null -eq (Get-Module -Name 'powershell-yaml' -ListAvailable)) {
-        Install-Module 'powershell-yaml' -Scope CurrentUser
+        Install-Module 'powershell-yaml' -Scope CurrentUser -Confirm:$false -Force
     }
 
     Import-Module "$PSScriptRoot/../publish/Import-ConfigData" -Force
