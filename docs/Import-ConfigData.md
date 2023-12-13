@@ -59,3 +59,4 @@ data
 - [https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_data_files?view=powershell-7.4](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_data_files?view=powershell-7.4)
 - [https://toml.io/](https://toml.io/)
 - [https://yaml.org/](https://yaml.org/)
+- [https://github.com/cloudbase/powershell-yaml](https://github.com/cloudbase/powershell-yaml)
