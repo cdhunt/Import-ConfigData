@@ -201,7 +201,6 @@ switch ($Task) {
         ChangeLog
     }
     { $_ -contains 'publish' } {
-        Docs
         Publish
     }
     { $_ -contains 'docs' } {
