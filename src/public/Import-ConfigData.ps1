@@ -12,6 +12,8 @@ function Import-ConfigData {
     https://toml.io/
 .LINK
     https://yaml.org/
+.LINK
+    https://github.com/cloudbase/powershell-yaml
 .EXAMPLE
     $config = Import-ConfigData -Path config.psd1
     $config.DriveName
