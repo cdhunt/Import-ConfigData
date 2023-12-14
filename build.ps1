@@ -80,6 +80,10 @@ function Clean {
 function Build {
     param ()
 
+    if ($null -eq (Get-Module -Name 'powershell-yaml' -ListAvailable)) {
+        Install-Module 'powershell-yaml' -Scope CurrentUser -Confirm:$false -Force
+    }
+
     New-Item -Path $publish -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
 
     dotnet publish $csproj -o $lib

@@ -60,11 +60,11 @@ jobs:
             publish
           retention-days: 1
 
-  test:
+  test7:
     permissions:
       contents: read # for actions/checkout to fetch code
       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
-    name: Test
+    name: Test PowerShell 7
     needs: Build
     runs-on: ubuntu-latest
     container:
@@ -86,12 +86,32 @@ jobs:
         shell: pwsh
         run: ./build.ps1 test
 
+  test5:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    name: Test PowerShell 5
+    needs: Build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build output
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: publish
+
+      - name: Test
+        shell: pwsh
+        run: ./build.ps1 test
+
   publish:
     permissions:
       contents: read # for actions/checkout to fetch code
       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     name: Publish
-    needs: Test
+    needs: [test7, test5]
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/dotnet/sdk:8.0
