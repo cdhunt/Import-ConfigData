@@ -2,6 +2,16 @@
 
 Load configuration data from multiple file types.
 
+## CI Status
+
+[![PowerShell](https://github.com/cdhunt/Import-ConfigData/actions/workflows/powershell.yml/badge.svg)](https://github.com/cdhunt/Import-ConfigData/actions/workflows/powershell.yml)
+
+## Install
+
+[powershellgallery.com/packages/Import-ConfigData](https://www.powershellgallery.com/packages/potel)
+
+`Install-Module -Name Import-ConfigData` or `Install-PSResource -Name poImport-ConfigDatatel`
+
 ## Docs
 
 [Full Docs](docs)
