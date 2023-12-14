@@ -36,7 +36,7 @@ if ( (Get-Command 'nbgv' -CommandType Application -ErrorAction SilentlyContinue)
 }
 
 $parent = $PSScriptRoot
-$parent = [string]::IsNullOrEmpty($parent) ? $pwd.Path : $parent
+$parent = if ([string]::IsNullOrEmpty($parent)) { $pwd.Path } else { $parent }
 $src = Join-Path $parent -ChildPath "src"
 $docs = Join-Path $parent -ChildPath "docs"
 $publish = Join-Path $parent -ChildPath "publish" -AdditionalChildPath 'Import-ConfigData'
@@ -143,7 +143,20 @@ function Test {
 
 function ChangeLog {
     param ()
+    "# Changelog"
 
+    # Start log at >0.1.11
+    for ($m = $Minor; $m -ge 1; $m--) {
+        for ($b = $Build; $b -gt 11; $b--) {
+            "## v$Major.$m.$b"
+            nbgv get-commits "$Major.$m.$b" | ForEach-Object {
+                $hash, $ver, $message = $_.split(' ')
+                $shortHash = $hash.Substring(0, 7)
+
+                "- [$shortHash](https://github.com/cdhunt/potel/commit/$hash) $($message -join ' ')"
+            }
+        }
+    }
 }
 
 function Commit {
