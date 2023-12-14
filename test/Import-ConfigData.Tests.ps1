@@ -47,6 +47,7 @@ Describe 'Import-ConfigData' {
         It 'Should import a <type> file' -ForEach @(
             @{ config = "$PSScriptRoot/test3/TestConfig.psd1"; type = 'PSD1' }
             @{ config = "$PSScriptRoot/test3/TestConfig.toml"; type = 'TOML' }
+            @{ config = "$PSScriptRoot/test3/TestConfig.yml"; type = 'YAML' }
         ) {
             $results = Import-ConfigData -Path $config
 
