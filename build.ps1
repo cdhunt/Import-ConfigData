@@ -35,11 +35,12 @@ if ( (Get-Command 'nbgv' -CommandType Application -ErrorAction SilentlyContinue)
     if (!$PSBoundParameters.ContainsKey('Revision')) { $Revision = $(nbgv get-version -v VersionRevision) }
 }
 
+$module = 'Import-ConfigData'
 $parent = $PSScriptRoot
 $parent = if ([string]::IsNullOrEmpty($parent)) { $pwd.Path } else { $parent }
 $src = Join-Path $parent -ChildPath "src"
 $docs = Join-Path $parent -ChildPath "docs"
-$publish = [System.IO.Path]::Combine($parent, "publish", 'Import-ConfigData')
+$publish = [System.IO.Path]::Combine($parent, "publish", $module)
 $csproj = [System.IO.Path]::Combine($src, "dotnet", "dependencies.csproj")
 $bin = [System.IO.Path]::Combine($src, "dotnet", "bin")
 $obj = [System.IO.Path]::Combine($src, "dotnet", "obj")
@@ -53,18 +54,19 @@ Write-Host "dotnet: $([Environment]::Version)"
 Write-Host "ps: $($PSVersionTable.PSVersion)"
 
 $manifest = @{
-    Path                 = Join-Path -Path $publish -ChildPath 'Import-ConfigData.psd1'
+    Path                 = Join-Path -Path $publish -ChildPath "$module.psd1"
     Author               = 'Chris Hunt'
     CompanyName          = 'Chris Hunt'
-    Copyright            = 'Chris Hunt'
+    Copyright            = '(c) Chris Hunt. All rights reserved.'
     CompatiblePSEditions = @("Desktop", "Core")
     Description          = 'Load configuration data from multiple file types.'
-    LicenseUri           = 'https://github.com/cdhunt/Import-ConfigData/blob/main/LICENSE'
+    GUID                 = 'f46f9bd2-90f3-4007-9062-aa46d4fa2221'
+    LicenseUri           = "https://github.com/cdhunt/$module/blob/main/LICENSE"
     FunctionsToExport    = @()
     ModuleVersion        = [version]::new($Major, $Minor, $Build, $Revision)
     PowerShellVersion    = '5.1'
     #ProjectUri            = 'https://github.com/cdhunt/Import-ConfigData'
-    RootModule           = 'Import-ConfigData.psm1'
+    RootModule           = "$module.psm1"
     Tags                 = @('development', 'configuration', 'settings', 'storage', 'yaml', 'toml')
     RequiredModules      = @( @{ModuleName = 'powershell-yaml'; ModuleVersion = '0.4.7' } )
 }
@@ -97,7 +99,7 @@ function Build {
     Get-ChildItem -Path $lib -filter "System.Management.Automation.dll" | Remove-Item -Force -ErrorAction SilentlyContinue
     Get-ChildItem -Path $lib -filter "dependencies.dll" | Remove-Item -Force -ErrorAction SilentlyContinue
 
-    Copy-Item -Path "$src/Import-ConfigData.psm1" -Destination $publish
+    Copy-Item -Path "$src/$module.psm1" -Destination $publish
     Copy-Item -Path @("$parent/LICENSE", "$parent/README.md") -Destination $publish -ErrorAction SilentlyContinue
 
     $internalFunctions = Get-ChildItem -Path "$src/internal/Add-PackageTypes.ps1"
@@ -112,14 +114,14 @@ function Build {
     New-Item -Path "$publish/public" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
     foreach ($function in $publicFunctions) {
         Copy-Item -Path $function.FullName -Destination "$publish/public/$($function.Name)"
-        '. "$PSSCriptRoot/public/{0}"' -f $function.Name | Add-Content "$publish/Import-ConfigData.psm1"
+        '. "$PSSCriptRoot/public/{0}"' -f $function.Name | Add-Content "$publish/$module.psm1"
         $manifest.FunctionsToExport += $function.BaseName
     }
 
     New-Item -Path "$publish/private" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
     foreach ($function in $privateFunctions) {
         Copy-Item -Path $function.FullName -Destination "$publish/private/$($function.Name)"
-        '. "$PSSCriptRoot/private/{0}"' -f $function.Name | Add-Content "$publish/Import-ConfigData.psm1"
+        '. "$PSSCriptRoot/private/{0}"' -f $function.Name | Add-Content "$publish/$module.psm1"
     }
 
     if ($PSBoundParameters.ContainsKey('Prerelease')) {
@@ -187,7 +189,7 @@ function Docs {
 
     Import-Module $publish -Force
 
-    $commands = Get-Command -Module Import-ConfigData
+    $commands = Get-Command -Module $module
     $HelpToMd = [System.IO.Path]::Combine($src, 'internal', 'Export-HelpToMd.ps1')
     . $HelpToMd
 

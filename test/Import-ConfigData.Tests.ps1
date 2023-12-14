@@ -43,6 +43,21 @@ Describe 'Import-ConfigData' {
             $results.ObjectArray[1].PropertyList[1] | Should -Be "two"
         }
     }
+    Context 'httpunitPS Object' {
+        It 'Should import a <type> file' -ForEach @(
+            @{ config = "$PSScriptRoot/test3/TestConfig.psd1"; type = 'PSD1' }
+            @{ config = "$PSScriptRoot/test3/TestConfig.toml"; type = 'TOML' }
+        ) {
+            $results = Import-ConfigData -Path $config
+
+            $results.plan.Count | Should -Be 1
+            $results.plan[0]['url'] | Should -Be 'https://www.google.com'
+            $results.plan[0]['timeout'] | Should -BeExactly '0:0:10'
+            $results.plan[0]['headers'] | Should -BeOfType 'Hashtable'
+            $results.plan[0]['code'] | Should -Be 200
+            $results.plan[0]['label'] | Should -BeExactly 'google'
+        }
+    }
 }
 
 AfterAll {

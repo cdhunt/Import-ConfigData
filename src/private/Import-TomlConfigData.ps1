@@ -26,7 +26,24 @@ function Import-TomlConfigData {
 
                 $next = @{}
                 foreach ($pk in $prop.Keys) {
-                    $next.Add($pk, $prop[$pk])
+                    $pv = $prop[$pk]
+                    $pvtype = $pv.GetType()
+
+                    if ($pvtype.IsValueType) {
+                        $cleanpv = $pv
+                    }
+                    elseif ($pvtype.Name -eq 'TomlTable') {
+                        $cleanpv = @{}
+                        $pv.ForEach({ $cleanpv.Add($_.Key, $_.Value) })
+                    }
+                    elseif ($pvtype.Name -eq 'TomlArray') {
+                        $cleanpv = @()
+                        $pv.ForEach({ $cleanpv += $_ })
+                    }
+                    else {
+                        $cleanpv = $pv.ToString()
+                    }
+                    $next.Add($pk, $cleanpv)
                 }
 
                 $top[$key].Add($next)
