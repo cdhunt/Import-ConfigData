@@ -8,9 +8,9 @@ Load configuration data from multiple file types.
 
 ## Install
 
-[powershellgallery.com/packages/Import-ConfigData](https://www.powershellgallery.com/packages/potel)
+[powershellgallery.com/packages/Import-ConfigData](https://www.powershellgallery.com/packages/Import-ConfigData)
 
-`Install-Module -Name Import-ConfigData` or `Install-PSResource -Name poImport-ConfigDatatel`
+`Install-Module -Name Import-ConfigData` or `Install-PSResource -Name Import-ConfigData`
 
 ## Docs
 
