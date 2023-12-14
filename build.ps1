@@ -39,11 +39,11 @@ $parent = $PSScriptRoot
 $parent = if ([string]::IsNullOrEmpty($parent)) { $pwd.Path } else { $parent }
 $src = Join-Path $parent -ChildPath "src"
 $docs = Join-Path $parent -ChildPath "docs"
-$publish = Join-Path $parent -ChildPath "publish" -AdditionalChildPath 'Import-ConfigData'
-$csproj = Join-Path -Path $src -ChildPath "dotnet" -AdditionalChildPath "dependencies.csproj"
-$bin = Join-Path -Path $src -ChildPath "dotnet" -AdditionalChildPath "bin"
-$obj = Join-Path -Path $src -ChildPath "dotnet" -AdditionalChildPath "obj"
-$lib = Join-Path -Path $publish -ChildPath "lib"
+$publish = [System.IO.Path]::Combine($parent, "publish", 'Import-ConfigData')
+$csproj = [System.IO.Path]::Combine($src, "dotnet", "dependencies.csproj")
+$bin = [System.IO.Path]::Combine($src, "dotnet", "bin")
+$obj = [System.IO.Path]::Combine($src, "dotnet", "obj")
+$lib = [System.IO.Path]::Combine($publish, "lib")
 
 Write-Host "src: $src"
 Write-Host "docs: $docs"
@@ -188,7 +188,7 @@ function Docs {
     Import-Module $publish -Force
 
     $commands = Get-Command -Module Import-ConfigData
-    $HelpToMd = Join-Path -Path $src -ChildPath 'internal' -AdditionalChildPath 'Export-HelpToMd.ps1'
+    $HelpToMd = [System.IO.Path]::Combine($src, 'internal', 'Export-HelpToMd.ps1')
     . $HelpToMd
 
     @('# Import-ConfigData', [System.Environment]::NewLine) | Set-Content -Path "$docs/README.md"
