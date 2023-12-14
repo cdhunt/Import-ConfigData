@@ -77,12 +77,17 @@ function Clean {
     }
 }
 
-function Build {
+function Dependencies {
     param ()
 
     if ($null -eq (Get-Module -Name 'powershell-yaml' -ListAvailable)) {
         Install-Module 'powershell-yaml' -Scope CurrentUser -Confirm:$false -Force
     }
+
+}
+
+function Build {
+    param ()
 
     New-Item -Path $publish -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
 
@@ -199,15 +204,18 @@ switch ($Task) {
         Build
     }
     { $_ -contains 'test' } {
+        Dependencies
         Test
     }
     { $_ -contains 'changelog' } {
         ChangeLog
     }
     { $_ -contains 'publish' } {
+        Dependencies
         Publish
     }
     { $_ -contains 'docs' } {
+        Dependencies
         Docs
     }
     Default {
