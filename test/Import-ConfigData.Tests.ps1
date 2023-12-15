@@ -10,6 +10,7 @@ Describe 'Import-ConfigData' {
             @{ config = "$PSScriptRoot/test1/TestConfig.psd1"; type = 'PSD1' }
             @{ config = "$PSScriptRoot/test1/TestConfig.toml"; type = 'TOML' }
             @{ config = "$PSScriptRoot/test1/TestConfig.yml"; type = 'YAML' }
+            @{ config = "$PSScriptRoot/test1/TestConfig.json"; type = 'JSON' }
         ) {
             $results = Import-ConfigData -Path $config
 
@@ -23,6 +24,7 @@ Describe 'Import-ConfigData' {
             @{ config = "$PSScriptRoot/test2/TestConfig.psd1"; type = 'PSD1' }
             @{ config = "$PSScriptRoot/test2/TestConfig.toml"; type = 'TOML' }
             @{ config = "$PSScriptRoot/test2/TestConfig.yml"; type = 'YAML' }
+            @{ config = "$PSScriptRoot/test2/TestConfig.json"; type = 'JSON' }
         ) {
             $results = Import-ConfigData -Path $config
 
@@ -48,6 +50,7 @@ Describe 'Import-ConfigData' {
             @{ config = "$PSScriptRoot/test3/TestConfig.psd1"; type = 'PSD1' }
             @{ config = "$PSScriptRoot/test3/TestConfig.toml"; type = 'TOML' }
             @{ config = "$PSScriptRoot/test3/TestConfig.yml"; type = 'YAML' }
+            @{ config = "$PSScriptRoot/test3/TestConfig.json"; type = 'JSON' }
         ) {
             $results = Import-ConfigData -Path $config
 

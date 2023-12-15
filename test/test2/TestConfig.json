@@ -1,0 +1,23 @@
+{
+    "ObjectArray": [
+        {
+            "PropertyInt": 1,
+            "PropertyList": [
+                4,
+                5,
+                6
+            ],
+            "PropertyString": "test_value",
+            "PropertyBool": true
+        },
+        {
+            "PropertyInt": 2,
+            "PropertyList": [
+                "one",
+                "two"
+            ],
+            "PropertyString": "test_value_2",
+            "PropertyBool": false
+        }
+    ]
+}
