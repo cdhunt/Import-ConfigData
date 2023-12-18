@@ -32,3 +32,21 @@ $config = Import-ConfigData -Path config.psd1
 $config.DriveName
 data
 ```
+
+These config files all return the same PowerShell object.
+
+```toml
+#config.toml
+DriveName = "data"
+```
+
+```yaml
+#config.yml
+DriveName: data
+```
+
+```json
+{
+    "DriveName": "data"
+}
+```
