@@ -57,10 +57,7 @@ function Import-ConfigData {
             '.toml' { Import-TomlConfigData -Path $Path; break }
             '.yaml' { Import-YamlConfigData -Path $Path; break }
             '.yml' { Import-YamlConfigData -Path $Path; break }
-            '.json' {
-                $content = Get-Content -Path $Path -Raw
-                $content | ConvertFrom-Json -AsHashtable; break
-            }
+            '.json' { Import-JsonConfigData -Path $Path; break }
         }
     }
 

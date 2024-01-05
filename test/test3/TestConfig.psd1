@@ -1,5 +1,5 @@
 @{
-    Plan = @(
+    plan = @(
         @{
             label   = "google"
             url     = "https://www.google.com"

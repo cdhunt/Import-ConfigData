@@ -4,6 +4,30 @@ BeforeAll {
 
 }
 
+Describe 'ConvertFrom-PSCustomObject' {
+    Context 'Object Array' {
+        BeforeAll {
+            . "$PSScriptRoot/../publish/Import-ConfigData/private/ConvertFrom-PSCustomObject.ps1"
+        }
+
+        AfterAll {
+            Remove-Item "function:/ConvertFrom-PSCustomObject"
+        }
+
+        It 'Should return an array of two objects' {
+            $sut = Get-Content -Path "$PSScriptRoot/Test2/TestConfig.json" -Raw | ConvertFrom-Json
+            $result = ConvertFrom-PSCustomObject $sut
+            $result.ObjectArray.Count | Should -Be 2
+        }
+
+        It 'Should return an array of one object' {
+            $sut = Get-Content -Path "$PSScriptRoot/Test3/TestConfig.json" -Raw | ConvertFrom-Json
+            $result = ConvertFrom-PSCustomObject $sut
+            $result.plan.Count | Should -Be 1
+        }
+    }
+}
+
 Describe 'Import-ConfigData' {
     Context 'Simple Object' {
         It 'Should import a <type> file' -ForEach @(
