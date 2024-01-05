@@ -6,7 +6,7 @@ Load configuration data from multiple file types. The returned object should loo
 
 ### Parameter Set 1
 
-- `[String]` **Path** _Specifies a path to a configuration file with an extention of psd1, toml, yaml, or yml._ Mandatory, ValueFromPipeline
+- `[String]` **Path** _Specifies a path to a configuration file with an extention of psd1, toml, json, yaml, or yml._ Mandatory, ValueFromPipeline
 
 ## Examples
 
