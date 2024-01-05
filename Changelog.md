@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2
+
+- Adds `json` support
+
 ## v0.1
 
 - [6c12e8d](https://github.com/cdhunt/potel/commit/6c12e8d6dcce2c44b1c70232268217794dd89696) Adds test for [httpunitPS](https://github.com/cdhunt/httpunitPS) configs and fixes related issues

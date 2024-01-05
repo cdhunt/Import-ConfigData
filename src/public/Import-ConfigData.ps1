@@ -5,7 +5,7 @@ function Import-ConfigData {
 .DESCRIPTION
     Load configuration data from multiple file types. The returned object should look the same regardless of the source format.
 .PARAMETER Path
-    Specifies a path to a configuration file with an extention of psd1, toml, yaml, or yml.
+    Specifies a path to a configuration file with an extention of psd1, toml, json, yaml, or yml.
 .LINK
     https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_data_files?view=powershell-7.4
 .LINK
@@ -57,6 +57,7 @@ function Import-ConfigData {
             '.toml' { Import-TomlConfigData -Path $Path; break }
             '.yaml' { Import-YamlConfigData -Path $Path; break }
             '.yml' { Import-YamlConfigData -Path $Path; break }
+            '.json' { Import-JsonConfigData -Path $Path; break }
         }
     }
 

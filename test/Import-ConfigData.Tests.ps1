@@ -4,12 +4,37 @@ BeforeAll {
 
 }
 
+Describe 'ConvertFrom-PSCustomObject' {
+    Context 'Object Array' {
+        BeforeAll {
+            . "$PSScriptRoot/../publish/Import-ConfigData/private/ConvertFrom-PSCustomObject.ps1"
+        }
+
+        AfterAll {
+            Remove-Item "function:/ConvertFrom-PSCustomObject"
+        }
+
+        It 'Should return an array of two objects' {
+            $sut = Get-Content -Path "$PSScriptRoot/test2/TestConfig.json" -Raw | ConvertFrom-Json
+            $result = ConvertFrom-PSCustomObject $sut
+            $result.ObjectArray.Count | Should -Be 2
+        }
+
+        It 'Should return an array of one object' {
+            $sut = Get-Content -Path "$PSScriptRoot/test3/TestConfig.json" -Raw | ConvertFrom-Json
+            $result = ConvertFrom-PSCustomObject $sut
+            $result.plan.Count | Should -Be 1
+        }
+    }
+}
+
 Describe 'Import-ConfigData' {
     Context 'Simple Object' {
         It 'Should import a <type> file' -ForEach @(
             @{ config = "$PSScriptRoot/test1/TestConfig.psd1"; type = 'PSD1' }
             @{ config = "$PSScriptRoot/test1/TestConfig.toml"; type = 'TOML' }
             @{ config = "$PSScriptRoot/test1/TestConfig.yml"; type = 'YAML' }
+            @{ config = "$PSScriptRoot/test1/TestConfig.json"; type = 'JSON' }
         ) {
             $results = Import-ConfigData -Path $config
 
@@ -23,6 +48,7 @@ Describe 'Import-ConfigData' {
             @{ config = "$PSScriptRoot/test2/TestConfig.psd1"; type = 'PSD1' }
             @{ config = "$PSScriptRoot/test2/TestConfig.toml"; type = 'TOML' }
             @{ config = "$PSScriptRoot/test2/TestConfig.yml"; type = 'YAML' }
+            @{ config = "$PSScriptRoot/test2/TestConfig.json"; type = 'JSON' }
         ) {
             $results = Import-ConfigData -Path $config
 
@@ -48,6 +74,7 @@ Describe 'Import-ConfigData' {
             @{ config = "$PSScriptRoot/test3/TestConfig.psd1"; type = 'PSD1' }
             @{ config = "$PSScriptRoot/test3/TestConfig.toml"; type = 'TOML' }
             @{ config = "$PSScriptRoot/test3/TestConfig.yml"; type = 'YAML' }
+            @{ config = "$PSScriptRoot/test3/TestConfig.json"; type = 'JSON' }
         ) {
             $results = Import-ConfigData -Path $config
 
