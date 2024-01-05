@@ -4,13 +4,17 @@ Load configuration data from multiple file types.
 
 ## CI Status
 
-[![PowerShell](https://github.com/cdhunt/Import-ConfigData/actions/workflows/powershell.yml/badge.svg)](https://github.com/cdhunt/Import-ConfigData/actions/workflows/powershell.yml)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/cdhunt/Import-ConfigData/powershell.yml?style=flat&logo=github)
+[![Testspace pass ratio](https://img.shields.io/testspace/pass-ratio/cdhunt/cdhunt%3AImport-ConfigData/main)](https://cdhunt.testspace.com/projects/67973/spaces)
+[![PowerShell Gallery](https://img.shields.io/powershellgallery/v/Import-ConfigData.svg?color=%235391FE&label=PowerShellGallery&logo=powershell&style=flat)](https://www.powershellgallery.com/packages/Import-ConfigData)
+
+![Build history](https://buildstats.info/github/chart/cdhunt/Import-ConfigData?branch=main)
 
 ## Install
 
-[powershellgallery.com/packages/Import-ConfigData](https://www.powershellgallery.com/packages/Import-ConfigData)
-
 `Install-Module -Name Import-ConfigData` or `Install-PSResource -Name Import-ConfigData`
+
+![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/Import-ConfigData?color=%235391FE&style=flat)
 
 ## Docs
 
