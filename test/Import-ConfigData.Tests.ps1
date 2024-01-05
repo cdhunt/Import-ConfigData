@@ -15,13 +15,13 @@ Describe 'ConvertFrom-PSCustomObject' {
         }
 
         It 'Should return an array of two objects' {
-            $sut = Get-Content -Path "$PSScriptRoot/Test2/TestConfig.json" -Raw | ConvertFrom-Json
+            $sut = Get-Content -Path "$PSScriptRoot/test2/TestConfig.json" -Raw | ConvertFrom-Json
             $result = ConvertFrom-PSCustomObject $sut
             $result.ObjectArray.Count | Should -Be 2
         }
 
         It 'Should return an array of one object' {
-            $sut = Get-Content -Path "$PSScriptRoot/Test3/TestConfig.json" -Raw | ConvertFrom-Json
+            $sut = Get-Content -Path "$PSScriptRoot/test3/TestConfig.json" -Raw | ConvertFrom-Json
             $result = ConvertFrom-PSCustomObject $sut
             $result.plan.Count | Should -Be 1
         }
