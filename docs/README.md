@@ -1,8 +1,8 @@
 # Import-ConfigData
 
-
 Load configuration data from multiple file types.
-## Cmdlets
 
+## Commands
 
-- [Import-ConfigData](Import-ConfigData.md) Load configuration data from multiple file types.
+- [Import-ConfigData](Import-ConfigData.md) _Load configuration data from multiple file types._
+
