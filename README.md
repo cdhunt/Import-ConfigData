@@ -1,6 +1,14 @@
 # Import-ConfigData
 
 Load configuration data from multiple file types.
+The returned _Hashtable_ should have the same structure regardless of the source format.
+
+Currently supported types:
+
+- [PSD1](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_data_files?view=powershell-7.4)
+- [YAML](https://yaml.org/)
+- [JSON](https://www.json.org/)
+- [TOML](https://toml.io/)
 
 ## CI Status
 
